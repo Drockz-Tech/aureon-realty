@@ -1,0 +1,351 @@
+/* --- Cinematic Splash Screen --- */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: splashFadeOut 0.5s ease-in 2.5s forwards;
+    pointer-events: none;
+}
+
+.splash-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.splash-keyhole {
+    width: 80px;
+    height: 120px;
+    fill: #000000;
+    stroke: var(--gold);
+    stroke-width: 2;
+    filter: drop-shadow(0px 0px 15px var(--gold));
+    z-index: 2;
+}
+
+.splash-key {
+    position: absolute;
+    width: 150px;
+    height: 60px;
+    left: 50%;
+    top: 50%;
+    margin-top: -30px;
+    margin-left: -75px;
+    transform: translateX(100vw);
+    z-index: 3;
+    animation: keySlideIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s forwards;
+}
+
+.light-explosion {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: #FFF;
+    box-shadow: 0 0 50px 30px #FFF, 0 0 150px 80px var(--gold);
+    opacity: 0;
+    z-index: 4;
+    animation: explodeLight 0.8s ease-in 1.8s forwards;
+}
+
+@keyframes keySlideIn {
+    0% { transform: translateX(100vw); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes explodeLight {
+    0% { transform: scale(1); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: scale(500); opacity: 1; }
+}
+
+@keyframes splashFadeOut {
+    0% { opacity: 1; visibility: visible; }
+    100% { opacity: 0; visibility: hidden; }
+}
+
+:root {
+    --gold: #D4AF37;
+    --gold-light: #F2D588;
+    --gold-dark: #997A15;
+    --maroon: #682E1E;
+    --bg-color: #040404;
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Montserrat', sans-serif;
+    --font-subtitle: 'Playfair Display', serif;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    font-family: var(--font-body);
+    overflow: hidden; /* Force no scrolling */
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    z-index: -2;
+}
+
+/* Ensure background always has enough contrast behind text */
+.background::after {
+    display: none;
+}
+
+.content-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Changed from center to flex-start to prevent top cutoff */
+    min-height: 100vh;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5vh 2rem 2rem 2rem; /* Added padding-top so the logo breathes */
+    box-sizing: border-box;
+    text-align: center;
+    z-index: 1;
+}
+
+.logo-box {
+    margin-bottom: 0.5rem;
+    position: relative;
+    /* Wait 3.0s for splash screen to completely vanish, then 3.0s for cinematic drop */
+    opacity: 0;
+    animation: majesticDrop 3.0s cubic-bezier(0.2, 0.8, 0.2, 1) 3.0s forwards;
+}
+
+.logo {
+    max-width: 500px;
+    max-height: 25vh;
+    width: auto;
+    /* Adjusted the image color to match our vibrant gold CSS palette perfectly */
+    filter: saturate(2) brightness(1.3) contrast(1.1) drop-shadow(0px 0px 8px rgba(212, 175, 55, 0.5));
+}
+
+.company-name {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 4vh, 2.8rem);
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 1.5vh;
+    /* Gold gradient text to match the dark luxury theme */
+    background: linear-gradient(to right, #C59B27, #F5D796, #D4AF37, #C59B27);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+    /* Fallback for browsers that don't support text clipping */
+    color: var(--gold);
+}
+
+.subtitle-group {
+    margin-bottom: 1vh;
+    line-height: 1.4;
+}
+
+.subtitle {
+    font-family: var(--font-primary);
+    font-size: clamp(1rem, 2vh, 1.2rem);
+    font-weight: 400;
+    color: var(--gold-light);
+    letter-spacing: 2px;
+}
+
+.subtitle .divider {
+    margin: 0 10px;
+    color: var(--gold);
+    opacity: 0.6;
+}
+
+.person-group {
+    margin-top: -3vh; /* Pulls the name up closer to the logo */
+    margin-bottom: 1vh;
+}
+
+.person-name {
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 3vh, 2rem);
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 2px;
+    margin-bottom: 0.5vh;
+}
+
+.person-role {
+    font-family: var(--font-primary);
+    font-size: clamp(0.9rem, 1.8vh, 1.1rem);
+    font-weight: 400;
+    color: var(--gold-light);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+hr.separator {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.8), transparent);
+    margin: 1vh 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+
+hr.short {
+    width: 25%;
+    max-width: 200px;
+}
+
+hr.long {
+    width: 60%;
+    max-width: 500px;
+}
+
+.contact-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8vh;
+    margin-bottom: 1.5vh;
+}
+
+.contact-item {
+    font-family: var(--font-heading);
+    font-size: clamp(1.1rem, 2.2vh, 1.4rem);
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 1.5px;
+}
+
+.footer {
+    margin-top: auto;
+    padding-bottom: 12vh; /* Increased so it sits cleanly above the skyline */
+    font-family: var(--font-heading);
+    font-size: clamp(0.8rem, 1.5vh, 1rem);
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 1.5px;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.9);
+    position: relative;
+    z-index: 10;
+}
+
+.skyline-container {
+    width: 100%;
+    max-width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.css-skyline {
+    width: 100%;
+    height: auto;
+    max-height: 120px;
+    filter: drop-shadow(0px 0px 8px rgba(212, 175, 55, 0.6));
+}
+
+.skyline-path {
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    /* Normalized path length using SVG pathLength="100" */
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    /* Animates the line drawing after the splash screen vanishes */
+    animation: drawSkyline 3s ease-in-out 3.0s forwards;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .logo { max-width: 200px; }
+}
+
+/* --- The Royal Seal Animations --- */
+
+@keyframes drawSkyline {
+    0% {
+        stroke-dashoffset: 100;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes majesticDrop {
+    0% {
+        opacity: 0;
+        /* Absolute mathematical center calculation */
+        transform: scale(1.4) translateY(calc(45vh - 50%));
+    }
+    10% {
+        opacity: 1;
+        transform: scale(1.4) translateY(calc(45vh - 50%));
+    }
+    50% {
+        opacity: 1;
+        /* Hold firmly in the center for 1.5s */
+        transform: scale(1.4) translateY(calc(45vh - 50%));
+    }
+    100% {
+        opacity: 1;
+        /* Glide perfectly to the top */
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes shimmerSweep {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+
+@keyframes textFadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo-box::after {
+    /* Shimmer happens right after logo reaches the top */
+    animation: shimmerSweep 2s cubic-bezier(0.4, 0, 0.2, 1) 6.0s forwards;
+}
+
+.person-group, .subtitle-group, hr.separator, .contact-group, .footer {
+    opacity: 0; /* Starts hidden */
+    animation: textFadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* Text details fade in sequentially AFTER the logo reaches the top (2.5s splash + 3.5s drop = 6s) */
+.person-group { animation-delay: 6.0s; }
+.subtitle-group { animation-delay: 6.3s; }
+hr.short { animation-delay: 6.45s; }
+.contact-group { animation-delay: 6.6s; }
+hr.long { animation-delay: 6.75s; }
+.footer { animation-delay: 6.9s; }
+
