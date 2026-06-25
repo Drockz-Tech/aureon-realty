@@ -96,19 +96,21 @@
   .hero-rule { width: 48px; height: 1px; background: var(--gold); margin-bottom: 28px; opacity: 0.6; }
   .hero-sub { font-size: 13px; font-weight: 300; line-height: 1.8; color: rgba(247,243,238,0.55); max-width: 340px; }
   .hero-right { background: var(--off-white); display: flex; flex-direction: column; justify-content: center; padding: 80px 70px; border-left: 1px solid var(--warm-grey); }
-  .stat-grid { 
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1px; 
-    padding: 1px; margin-bottom: 56px; 
-    position: relative; overflow: hidden; isolation: isolate; 
+  .animated-grid { 
+    position: relative; overflow: hidden; isolation: isolate; padding: 1px; 
   }
-  .stat-grid::before {
+  .animated-grid::before {
     content: ""; position: absolute; inset: 0; background: var(--warm-grey); z-index: -2;
   }
-  .stat-grid::after {
+  .animated-grid::after {
     content: ""; position: absolute; top: 50%; left: 50%; width: 300%; aspect-ratio: 1;
     background: conic-gradient(from 0deg, transparent 50%, rgba(184, 134, 11, 0.2) 75%, var(--gold) 95%, transparent 100%);
     z-index: -1; animation: rotateBorder 6s linear infinite;
     will-change: transform;
+  }
+  .stat-grid { 
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px; 
+    margin-bottom: 56px; 
   }
   @keyframes rotateBorder {
     0% { transform: translate(-50%, -50%) rotate(0deg); }
@@ -136,7 +138,7 @@
   /* â•â•â•â• PILLARS â•â•â•â• */
   .pillars-section { background: var(--off-white); padding: 120px 60px; text-align: center; }
   .pillars-header { max-width: 600px; margin: 0 auto 80px; }
-  .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--warm-grey); border: 1px solid var(--warm-grey); max-width: 1100px; margin: 0 auto; }
+  .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: transparent; max-width: 1100px; margin: 0 auto; }
   .pillar-card { background: var(--off-white); padding: 60px 48px; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; overflow: hidden; }
   .pillar-card::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1px; height: 0; background: var(--gold); transition: height 0.6s ease; }
   .pillar-card:hover::before { height: 48px; }
@@ -160,13 +162,13 @@
   .about-bio { font-family: "Cormorant Garamond", serif; font-size: 22px; font-weight: 400; font-style: italic; line-height: 1.6; color: var(--text-body); margin-bottom: 32px; border-left: 2px solid var(--gold); padding-left: 24px; }
   .about-body { font-size: 14px; font-weight: 300; line-height: 1.9; color: var(--mid-grey); margin-bottom: 20px; }
   .bank-logos { display: flex; flex-wrap: nowrap; gap: 10px; margin-top: 36px; overflow-x: auto; padding-bottom: 4px; }
-  .bank-tag { font-size: 10px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--charcoal); border: 1px solid var(--warm-grey); padding: 8px 12px; white-space: nowrap; }
+  .bank-tag { font-size: 10px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--charcoal); background: var(--off-white); padding: 8px 12px; white-space: nowrap; }
 
   /* â•â•â•â• SERVICES â•â•â•â• */
   .services { max-width: 1200px; margin: 0 auto; }
   .services-header { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: 80px; align-items: end; }
   .services-intro { font-size: 14px; line-height: 1.9; color: var(--mid-grey); padding-top: 16px; }
-  .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--warm-grey); border: 1px solid var(--warm-grey); }
+  .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: transparent; }
   .service-card { background: var(--off-white); padding: 52px 44px; transition: background 0.3s; }
   .service-card:hover { background: #F0EAE0; }
   .service-num { font-family: "Cormorant Garamond", serif; font-size: 13px; font-weight: 400; color: var(--gold); margin-bottom: 16px; letter-spacing: 0.1em; }
@@ -191,10 +193,10 @@
 
   /* â•â•â•â• CONTACT â•â•â•â• */
   .contact-section { background: var(--charcoal); padding: 120px 60px; text-align: center; }
-  .contact-inner { max-width: 720px; margin: 0 auto; }
+  .contact-inner { max-width: 1100px; margin: 0 auto; }
   .contact-section .section-title { color: var(--off-white); margin-bottom: 28px; }
-  .contact-sub { font-size: 14px; font-weight: 300; color: rgba(247,243,238,0.45); margin-bottom: 56px; line-height: 1.8; }
-  .contact-details { display: flex; justify-content: center; gap: 60px; margin-bottom: 56px; flex-wrap: wrap; }
+  .contact-sub { font-size: 14px; font-weight: 300; color: rgba(247,243,238,0.45); max-width: 720px; margin: 0 auto 56px; line-height: 1.8; }
+  .contact-details { display: flex; justify-content: center; gap: 40px; margin-bottom: 56px; flex-wrap: wrap; }
   .contact-item { text-align: left; }
   .contact-item-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; font-weight: 400; }
   .contact-item-value { font-family: "Cormorant Garamond", serif; font-size: 18px; font-weight: 400; color: var(--off-white); }
@@ -328,8 +330,7 @@
 
   .why-grid {
     display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1px; background: var(--warm-grey);
-    border: 1px solid var(--warm-grey);
+    gap: 1px; background: transparent;
   }
 
   .why-card {
@@ -542,7 +543,8 @@
 
   .bar-item {
     flex: 1;
-    display: flex; flex-direction: column; align-items: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+    height: 100%;
     gap: 0; position: relative;
   }
 
@@ -689,8 +691,7 @@
 
   .millionaire-right {
     display: flex; flex-direction: column; gap: 1px;
-    background: var(--warm-grey);
-    border: 1px solid var(--warm-grey);
+    background: transparent;
   }
 
   .milieu-card {
@@ -767,6 +768,64 @@
     .bar-chart-wrap { padding: 32px 24px 48px; }
     .dubai-indicators { padding: 0 28px; }
   }
+
+  @media (max-width: 600px) {
+    html, body { overflow-x: hidden; width: 100%; position: relative; }
+    
+    /* Fix Nav so WhatsApp icon is not hidden and doesn't cause page scroll */
+    nav { flex-wrap: wrap; justify-content: center; gap: 12px; padding: 16px; width: 100%; }
+    .nav-logo { width: 100%; justify-content: center; margin-bottom: 4px; }
+    .nav-logo-img { height: 36px; }
+    .nav-logo-name { font-size: 16px; }
+    .nav-logo-sub { display: none; }
+    .nav-cta { font-size: 11px; }
+    
+    /* Fix About Bank Logos Hidden */
+    .bank-logos { flex-wrap: wrap; justify-content: flex-start; overflow-x: visible; }
+    
+    .hero { padding-top: 100px; } /* Room for wrapped nav */
+    .hero-headline { font-size: 36px !important; margin-bottom: 24px; line-height: 1.1; }
+    .hero-left { padding: 40px 24px 48px; min-height: 50vh; overflow: hidden; }
+    .hero-right { padding: 48px 24px; overflow: hidden; }
+    
+    section, .why-dubai, .difc-section, .transformation-section, .chart-section, .millionaire-section, .dubai-cta, .pillars-section, .philosophy, .about-section, .contact-section { padding: 60px 20px !important; overflow: hidden; }
+    .section-title, .dubai-hero-title, .dubai-cta-title { font-size: 32px !important; line-height: 1.15; }
+    .dubai-hero-content { padding: 0 20px 40px; }
+    .dubai-indicators { padding: 0 20px; }
+    
+    .stat-grid { grid-template-columns: 1fr; }
+    .indicators-row { grid-template-columns: 1fr; }
+    .indicator-cell { border-right: none; border-bottom: 1px solid rgba(26,26,26,0.15); padding: 20px; }
+    .indicator-cell:last-child { border-bottom: none; }
+    
+    .cred-row, .timeline-strip, .difc-stats { grid-template-columns: 1fr; margin-top: 32px; }
+    .cred-cell, .timeline-cell, .difc-stat-cell { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 24px 20px; }
+    .cred-cell:last-child, .timeline-cell:last-child, .difc-stat-cell:last-child { border-bottom: none; }
+    
+    .contact-details { flex-direction: column; align-items: center; gap: 32px; }
+    .contact-item { text-align: center; }
+    
+    .migration-bars { gap: 24px; }
+    .migration-row { flex-wrap: wrap; gap: 8px; }
+    .migration-country, .migration-value { width: 100%; text-align: left; font-size: 11px; }
+    .migration-value { color: var(--gold); margin-top: -4px; }
+    .millionaire-big-stat { font-size: 64px !important; }
+    
+    .bar-chart-wrap { overflow-x: auto; padding: 24px 16px 40px; }
+    .bars-container { min-width: 500px; }
+    .chart-y-labels { display: none; }
+    .bar-value-label { opacity: 1; font-size: 10px; } 
+    
+    .philosophy-inner, .about-inner, .why-dubai-header, .difc-grid, .transformation-header, .chart-header, .millionaire-grid, .approach-grid { gap: 32px; margin-top: 32px; }
+    
+    .intro-slide { padding: 20px; overflow: hidden; }
+    .s1-number { font-size: 80px !important; }
+    .s1-headline, .s2-headline, .pillar-word { font-size: 32px !important; }
+    .s3-line, .s3-line-2 { font-size: 26px !important; }
+    
+    .gold-divider { margin: 0 20px; }
+    footer { padding: 32px 20px; }
+  }
 </style>
 </head>
 <body>
@@ -830,7 +889,7 @@
     <li><a href="#dubai-hub">Dubai</a></li>
     <li><a href="#credentials">Profile</a></li>
   </ul>
-  <div style="display:flex; align-items:center; gap:12px;"><a href="#contact" class="nav-cta">Request a Meeting</a><a href="https://wa.me/971500000000" target="_blank" style="color:var(--gold); display:flex; align-items:center; justify-content:center; width:34px; height:34px; border: 1px solid var(--gold); border-radius:50%; transition: transform 0.2s, background 0.3s;" onmouseover="this.style.background='rgba(184, 134, 11, 0.1)'" onmouseout="this.style.background='transparent'"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a></div>
+  <div style="display:flex; align-items:center; gap:12px;"><a href="#contact" class="nav-cta">Request a Meeting</a><a href="https://wa.me/971551212508" target="_blank" style="color:var(--gold); display:flex; align-items:center; justify-content:center; width:34px; height:34px; border: 1px solid var(--gold); border-radius:50%; transition: transform 0.2s, background 0.3s;" onmouseover="this.style.background='rgba(184, 134, 11, 0.1)'" onmouseout="this.style.background='transparent'"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a></div>
 </nav>
 
 <!-- â•â•â•â• HERO â•â•â•â• -->
@@ -842,9 +901,9 @@
     <p class="hero-sub">Where private capital meets deep market intelligence. Structuring real asset portfolios for high-net-worth individuals, family offices, and institutional investors across Dubai's most significant property landscape.</p>
   </div>
   <div class="hero-right">
-    <div class="stat-grid">
+    <div class="stat-grid animated-grid">
       <div class="stat-cell"><div class="stat-number">25<sup>+</sup></div><div class="stat-label">Years in UAE Markets</div></div>
-      <div class="stat-cell"><div class="stat-number">CWA</div><div class="stat-label">CISI Certified, UK</div></div>
+      <div class="stat-cell"><div class="stat-number" style="font-size: 24px; padding-top: 8px;">Certified Wealth Advisor</div><div class="stat-label">CISI, UK</div></div>
       <div class="stat-cell"><div class="stat-number">HNW</div><div class="stat-label">Private Client Focus</div></div>
       <div class="stat-cell"><div class="stat-number">UAE</div><div class="stat-label">Market Intelligence</div></div>
     </div>
@@ -852,7 +911,7 @@
     <div class="hero-name-block">
       <div class="hero-avatar"><span class="monogram">GM</span></div>
       <div>
-        <div class="hero-name">Gaurav Mehta, CWA</div>
+        <div class="hero-name">Gaurav Mehta, Certified Wealth Advisor - CISI, UK</div>
         <div class="hero-title-small">Founder &amp; Principal Advisor<br>Aureon Realty L.L.C, Dubai</div>
       </div>
     </div>
@@ -867,7 +926,7 @@
     <div class="section-eyebrow" style="justify-content:center;">The Foundation</div>
     <h2 class="section-title">The Three Pillars<br>of Aureon</h2>
   </div>
-  <div class="pillars-grid">
+  <div class="pillars-grid animated-grid">
     <div class="pillar-card fade-up"><div class="pillar-number">Pillar One</div><div class="pillar-name">Trust</div><div class="pillar-divider"></div><p class="pillar-desc">We earn confidence through experience, integrity and transparency. Every recommendation is made in your interest — never ours.</p></div>
     <div class="pillar-card fade-up"><div class="pillar-number">Pillar Two</div><div class="pillar-name">Discretion</div><div class="pillar-divider"></div><p class="pillar-desc">Every client relationship is handled with absolute confidentiality. Your financial affairs, your ambitions, and your family remain private.</p></div>
     <div class="pillar-card fade-up"><div class="pillar-number">Pillar Three</div><div class="pillar-name">Legacy</div><div class="pillar-divider"></div><p class="pillar-desc">We help families build, preserve and transfer wealth through real estate — with a generational perspective that transcends any single transaction.</p></div>
@@ -903,10 +962,10 @@
       <p class="about-body">Gaurav Mehta has served some of the region's most discerning clients across institutions including Abu Dhabi Commercial Bank (ADCB), Standard Chartered Bank, and First Abu Dhabi Bank (FAB). Having advised High-Net-Worth and Ultra-High-Net-Worth individuals across multiple markets and asset classes, he brings a portfolio management mindset to every real estate decision.</p>
       <p class="about-body">Aureon Realty was established on the belief that real estate should be a strategic component of a broader wealth creation plan — built on trust, discretion and long-term relationships. Gaurav helps investors identify opportunities that align with their financial objectives, risk appetite and legacy aspirations.</p>
       <div class="bank-logos">
-        <span class="bank-tag">ADCB</span>
-        <span class="bank-tag">Standard Chartered</span>
-        <span class="bank-tag">First Abu Dhabi Bank</span>
-        <span class="bank-tag">25+ Years UAE</span>
+        <div class="animated-grid" style="display:inline-flex;"><span class="bank-tag">ADCB</span></div>
+        <div class="animated-grid" style="display:inline-flex;"><span class="bank-tag">Standard Chartered</span></div>
+        <div class="animated-grid" style="display:inline-flex;"><span class="bank-tag">First Abu Dhabi Bank</span></div>
+        <div class="animated-grid" style="display:inline-flex;"><span class="bank-tag">25+ Years UAE</span></div>
       </div>
     </div>
   </div>
@@ -921,7 +980,7 @@
       <div><div class="section-eyebrow">Advisory Services</div><h2 class="section-title">How we work<br>with private clients.</h2></div>
       <p class="services-intro">Each engagement begins with a private consultation — not a property viewing. We map your objectives first, then architect the portfolio to achieve them. Our client relationships are long-term and discretionary by design.</p>
     </div>
-    <div class="service-grid">
+    <div class="service-grid animated-grid">
       <div class="service-card fade-up"><div class="service-num">I</div><div class="service-title">Real Asset Portfolio Strategy</div><p class="service-desc">Structured portfolio construction across Dubai's residential, commercial, and alternative real estate segments. Research-led allocation aligned to your risk-return profile and investment horizon.</p></div>
       <div class="service-card fade-up"><div class="service-num">II</div><div class="service-title">Private Client Advisory</div><p class="service-desc">Bespoke advisory for high-net-worth individuals seeking a confidential sounding board — beyond what banks offer. Strategic guidance on entry timing, asset selection, and wealth preservation.</p></div>
       <div class="service-card fade-up"><div class="service-num">III</div><div class="service-title">Family Office Services</div><p class="service-desc">Real estate as an asset class within a broader family wealth context. Portfolio review, generational transfer planning, and structured diversification into UAE real assets.</p></div>
@@ -987,7 +1046,7 @@
       </div>
       <p class="why-dubai-intro">"Dubai is no longer an emerging market story. It is a mature, liquid, globally connected real estate ecosystem — one that continues to outperform because the fundamentals are structural, not cyclical."</p>
     </div>
-    <div class="why-grid">
+    <div class="why-grid animated-grid">
       <div class="why-card fade-up">
         <span class="why-icon">⚖️</span>
         <div class="why-title">Zero Tax Jurisdiction</div>
@@ -1128,7 +1187,7 @@
         <p style="font-size:10px;color:var(--mid-grey);margin-top:16px;letter-spacing:0.1em;">Source: Henley &amp; Partners Wealth Migration Report 2025</p>
       </div>
 
-      <div class="millionaire-right fade-up">
+      <div class="millionaire-right fade-up animated-grid">
         <div class="milieu-card">
           <div class="milieu-title">Golden Visa Programme</div>
           <p class="milieu-text">Investors purchasing AED 2M+ in real estate qualify for a 10-year UAE Golden Visa — creating permanent residency rights, full family sponsorship, and long-term stability that no other market offers at this price point.</p>
@@ -1245,7 +1304,8 @@
     <h2 class="section-title" style="color:var(--off-white);">Let us begin<br>with a conversation.</h2>
     <p class="contact-sub">Aureon does not advertise mandates or hold open viewings. New client relationships begin with a confidential introductory meeting — in person or by private call. If you are serious about capital allocation into Dubai real assets, we would welcome the conversation.</p>
     <div class="contact-details">
-      <div class="contact-item"><div class="contact-item-label">Phone</div><div class="contact-item-value"><a href="tel:+971504236298">+971 50 423 62 98</a></div></div>
+      <div class="contact-item"><div class="contact-item-label">Dubai</div><div class="contact-item-value"><a href="tel:+971551212508">+971 55 1212 508</a></div></div>
+      <div class="contact-item"><div class="contact-item-label">India</div><div class="contact-item-value"><a href="tel:+918657204704">+91 865 720 47 04</a></div></div>
       <div class="contact-item"><div class="contact-item-label">Email</div><div class="contact-item-value"><a href="mailto:Gaurav@aureon-realty.com">Gaurav@aureon-realty.com</a></div></div>
       <div class="contact-item"><div class="contact-item-label">Web</div><div class="contact-item-value"><a href="http://www.aureon-realty.com">www.aureon-realty.com</a></div></div>
     </div>
