@@ -235,6 +235,13 @@
   .s4-merge.visible .key-right { animation: keyFlyRight 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
   .s4-merge.visible .s4-text-reveal { opacity: 0; animation: textRevealUp 1s ease 1s forwards; }
 
+  @keyframes cinematicSweep {
+    0% { clip-path: inset(0 100% 0 0); filter: brightness(3) blur(6px) drop-shadow(0 0 20px #FFD700); transform: scale(1.05); }
+    50% { filter: brightness(2) blur(0px) drop-shadow(0 0 15px #FFD700); transform: scale(1); }
+    100% { clip-path: inset(0 0 0 0); filter: brightness(1) drop-shadow(0 0 5px rgba(218,165,32,0.4)); transform: scale(1); }
+  }
+  .s4-merge.visible #cinematic-logo { animation: cinematicSweep 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+
   /* ═══════════════════════════════════════════════════════════════════════════
      DUBAI INVESTMENT HUB — NEW SECTION STYLES
   ═══════════════════════════════════════════════════════════════════════════ */
@@ -801,10 +808,11 @@
     /* Fix About Bank Logos Hidden */
     .bank-logos { flex-wrap: wrap; justify-content: flex-start; overflow-x: visible; }
     
-    .hero { padding-top: 100px; } /* Room for wrapped nav */
+    .hero { padding-top: 140px !important; padding-left: 0 !important; padding-right: 0 !important; padding-bottom: 0 !important; } /* Room for wrapped nav */
+    .hero-eyebrow { font-size: 9px; letter-spacing: 0.15em; line-height: 1.6; display: block; }
     .hero-headline { font-size: 36px !important; margin-bottom: 24px; line-height: 1.1; }
-    .hero-left { padding: 40px 24px 48px; min-height: 50vh; overflow: hidden; }
-    .hero-right { padding: 48px 24px; overflow: hidden; }
+    .hero-left { padding: 40px 24px 48px; min-height: 50vh; overflow: visible; justify-content: flex-start; }
+    .hero-right { padding: 48px 24px; overflow: hidden; justify-content: center; }
     
     section, .why-dubai, .difc-section, .transformation-section, .chart-section, .millionaire-section, .dubai-cta, .pillars-section, .philosophy, .about-section, .contact-section { padding: 60px 20px !important; overflow: hidden; }
     .section-title, .dubai-hero-title, .dubai-cta-title { font-size: 32px !important; line-height: 1.15; }
@@ -884,12 +892,11 @@
       <div class="pillar-word" id="pw-leg">LEGACY</div>
     </div>
     <div class="s4-merge" id="s4-merge">
-      <div class="keys-container" style="position: relative; width: 250px; height: 180px; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center;">
-        <img src="key1.png" class="key-left" alt="Key 1" style="position: absolute; top: 0; left: 0; width: 100%; height: auto; opacity: 0;">
-        <img src="key2.png" class="key-right" alt="Key 2" style="position: absolute; top: 0; left: 0; width: 100%; height: auto; opacity: 0;">
+      <div class="cinematic-reveal-container" style="position: relative; width: 600px; height: 400px; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center; max-width: 100%;">
+        <img src="logo-removebg-preview.png" id="cinematic-logo" style="width: 500px; max-width: 90vw; height: auto; position: absolute; margin: auto; inset: 0; filter: brightness(0); clip-path: inset(0 100% 0 0); z-index: 5;" alt="Aureon Logo">
+        <canvas id="particle-logo-canvas" width="600" height="400" style="position: absolute; top: 0; left: 0; z-index: 10; pointer-events: none; max-width: 100%;"></canvas>
       </div>
       <div class="s4-text-reveal" style="opacity: 0;">
-        <div class="s4-brand">Aureon Realty</div>
         <div class="s4-tagline">Where Wealth Meets Wisdom</div>
       </div>
     </div>
@@ -1371,7 +1378,7 @@ window.addEventListener("keydown", function(e) {
   setTimeout(function(){ addClass("s1-headline","in"); }, t+900);
   setTimeout(function(){ addClass("s1-sub","in"); }, t+1500);
   setTimeout(function(){ addClass("s1-rule-bottom","expand"); }, t+1800);
-  t += 4800; setTimeout(function(){ hideSlide("slide-1"); }, t);
+  t += 6800; setTimeout(function(){ hideSlide("slide-1"); }, t);
 
   t += 800; setTimeout(function(){ showSlide("slide-2"); }, t);
   setTimeout(function(){ addClass("s2-rule-top","expand"); }, t+200);
@@ -1393,11 +1400,100 @@ window.addEventListener("keydown", function(e) {
   setTimeout(function(){ addClass("pw-leg","visible"); }, t+2700);
   var pillarsOut = t + 4400;
   setTimeout(function(){ var s = document.getElementById("s4-pillars"); s.style.transition = "opacity 0.8s ease, transform 0.8s ease"; s.style.opacity = "0"; s.style.transform = "scale(0.92)"; }, pillarsOut);
-  setTimeout(function(){ document.getElementById("s4-pillars").style.display = "none"; addClass("s4-merge","visible"); }, pillarsOut+900);
+  setTimeout(function(){ 
+    document.getElementById("s4-pillars").style.display = "none"; 
+    addClass("s4-merge","visible"); 
+    startGoldenParticles();
+  }, pillarsOut+900);
   var overlayOut = pillarsOut + 5000;
   setTimeout(function(){ overlay.style.transition = "opacity 1s ease"; overlay.style.opacity = "0"; overlay.style.pointerEvents = "none"; }, overlayOut);
   setTimeout(function(){ overlay.style.display = "none"; }, overlayOut+1100);
 })();
+
+/* ════ GOLDEN PARTICLES LOGO REVEAL ════ */
+function startGoldenParticles() {
+  const canvas = document.getElementById('particle-logo-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const width = canvas.width;
+  const height = canvas.height;
+  
+  let particles = [];
+  let startTime = Date.now();
+  let isOverlayVisible = true;
+  
+  // Animation duration matches the CSS sweep
+  const duration = 2500;
+  
+  function easeOutQuart(x) {
+    return 1 - Math.pow(1 - x, 4);
+  }
+
+  function emitParticles(xPos, count) {
+    for(let i = 0; i < count; i++) {
+      particles.push({
+        x: xPos + (Math.random() * 20 - 10),
+        y: height / 2 + (Math.random() - 0.5) * 260, // Spread vertically around the logo
+        vx: (Math.random() - 0.5) * 3 + 1, // Flow to the right
+        vy: (Math.random() - 0.5) * 4 - 1, // Flow slightly upwards
+        life: 1,
+        decay: Math.random() * 0.015 + 0.01,
+        size: Math.random() * 2.5 + 0.5,
+        color: ['#FFD700', '#DAA520', '#FFF8DC', '#B8860B'][Math.floor(Math.random() * 4)]
+      });
+    }
+  }
+
+  function animate() {
+    if (!isOverlayVisible) return;
+    ctx.clearRect(0, 0, width, height);
+    ctx.globalCompositeOperation = 'lighter';
+    
+    let now = Date.now();
+    let elapsed = now - startTime;
+    let progress = Math.min(elapsed / duration, 1);
+    
+    let eased = easeOutQuart(progress);
+    
+    // Logo width is ~500px. Sweep goes from (width/2 - 250) to (width/2 + 250).
+    let sweepX = (width / 2 - 250) + eased * 500;
+    
+    if (progress < 1) {
+      emitParticles(sweepX, 7); // Emit golden dust at the sweep line (increased density for larger logo)
+    } else {
+      // Occasional random shimmer particles after reveal
+      if (Math.random() > 0.7) {
+        emitParticles(width / 2 + (Math.random() - 0.5) * 500, 1);
+      }
+    }
+    
+    for (let i = particles.length - 1; i >= 0; i--) {
+      let p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vx *= 0.96;
+      p.vy *= 0.96;
+      p.vy -= 0.02; // Float up like dust
+      p.life -= p.decay;
+      
+      if (p.life <= 0) {
+        particles.splice(i, 1);
+        continue;
+      }
+      
+      ctx.globalAlpha = p.life * (0.5 + Math.random() * 0.5); // Shimmer
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    
+    requestAnimationFrame(animate);
+  }
+  
+  animate();
+  setTimeout(() => { isOverlayVisible = false; }, 6000);
+}
 
 /* â•â•â•â• NAV SCROLL â•â•â•â• */
 var nav = document.getElementById("main-nav");
