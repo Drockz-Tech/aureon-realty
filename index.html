@@ -53,7 +53,7 @@
   .s2-headline { font-family: "Cormorant Garamond", serif; font-size: clamp(40px, 7vw, 90px); font-weight: 300; line-height: 1.05; color: var(--off-white); text-align: center; letter-spacing: 0.01em; opacity: 0; transform: translateY(24px); transition: opacity 1.1s ease, transform 1.1s ease; }
   .s2-headline.in { opacity: 1; transform: translateY(0); }
   .s2-headline em { color: var(--gold); font-style: italic; }
-  .s2-sub { font-size: 11px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(247,243,238,0.3); margin-top: 40px; text-align: center; opacity: 0; transition: opacity 0.9s ease 0.4s; }
+  .s2-sub { font-size: 11px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(247,243,238,0.8); margin-top: 40px; text-align: center; opacity: 0; transition: opacity 0.9s ease 0.4s; }
   .s2-sub.in { opacity: 1; }
   .s3-line { font-family: "Cormorant Garamond", serif; font-size: clamp(32px, 5.5vw, 72px); font-weight: 300; line-height: 1.15; color: var(--off-white); text-align: center; letter-spacing: 0.02em; opacity: 0; transform: translateY(20px); transition: opacity 1s ease, transform 1s ease; }
   .s3-line.in { opacity: 1; transform: translateY(0); }
@@ -891,12 +891,28 @@
       <div class="pillar-word" id="pw-disc">DISCRETION</div>
       <div class="pillar-word" id="pw-leg">LEGACY</div>
     </div>
-    <div class="s4-merge" id="s4-merge">
-      <div class="cinematic-reveal-container" style="position: relative; width: 600px; height: 400px; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center; max-width: 100%;">
-        <img src="logo-removebg-preview.png" id="cinematic-logo" style="width: 500px; max-width: 90vw; height: auto; position: absolute; margin: auto; inset: 0; filter: brightness(0); clip-path: inset(0 100% 0 0); z-index: 5;" alt="Aureon Logo">
-        <canvas id="particle-logo-canvas" width="600" height="400" style="position: absolute; top: 0; left: 0; z-index: 10; pointer-events: none; max-width: 100%;"></canvas>
+    <div class="s4-merge" id="s4-merge" style="width: 100vw; height: 100vh; justify-content: center;">
+      <style>
+        .vid-container {
+          position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; z-index: 1;
+        }
+        .vid-bg {
+          position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(40px) brightness(0.5); transform: scale(1.1); pointer-events: none;
+        }
+        .vid-fg {
+          position: relative; z-index: 2; width: 100%; height: 100%; object-fit: contain; pointer-events: none;
+        }
+        @media (max-width: 768px) {
+          .vid-bg { display: none; }
+          .vid-fg { object-fit: cover; }
+        }
+      </style>
+      <div class="vid-container">
+        <!-- Placeholder for your vertical video (e.g. 9:16) -->
+        <video id="vid-bg" class="vid-bg" src="animation.mp4" loop muted playsinline disablePictureInPicture></video>
+        <video id="vid-fg" class="vid-fg" src="animation.mp4" loop muted playsinline disablePictureInPicture></video>
       </div>
-      <div class="s4-text-reveal" style="opacity: 0;">
+      <div class="s4-text-reveal" style="opacity: 0; position: absolute; bottom: 60px; z-index: 10;">
         <div class="s4-tagline">Where Wealth Meets Wisdom</div>
       </div>
     </div>
@@ -919,7 +935,7 @@
     <li><a href="#dubai-hub">Dubai</a></li>
     <li><a href="#credentials">Profile</a></li>
   </ul>
-  <div style="display:flex; align-items:center; gap:12px;"><a href="#contact" class="nav-cta">Request a Meeting</a><a href="https://wa.me/971504236298" target="_blank" style="color:var(--gold); display:flex; align-items:center; justify-content:center; width:34px; height:34px; border: 1px solid var(--gold); border-radius:50%; transition: transform 0.2s, background 0.3s;" onmouseover="this.style.background='rgba(184, 134, 11, 0.1)'" onmouseout="this.style.background='transparent'"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a></div>
+  <div style="display:flex; align-items:center; gap:12px;"><a href="#contact" class="nav-cta">Request a Meeting</a><a href="https://wa.me/971504236298?text=Hi%20Gaurav%2C%0ALets%20connect%20on%20a%20call.." target="_blank" style="display:flex; align-items:center; justify-content:center; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"><svg viewBox="0 0 24 24" width="34" height="34" xmlns="http://www.w3.org/2000/svg"><path d="M11.96 0C5.353 0 0 5.353 0 11.961c0 2.632.846 5.068 2.302 7.086L.602 23.398l4.475-1.688A11.902 11.902 0 0 0 11.96 23.922c6.606 0 11.96-5.354 11.96-11.961C23.92 5.353 18.566 0 11.96 0z" fill="#25D366"/><path d="M18.156 14.733c-.302-.151-1.785-.88-2.062-.98-.276-.101-.478-.151-.679.151-.202.302-.78 .98-.956 1.18-.176.202-.352.227-.654.076-.302-.151-1.275-.47-2.428-1.5-1.011-.904-1.691-2.022-1.892-2.324-.202-.302-.021-.466.13-.617.136-.136.302-.352.453-.529.151-.176.202-.302.302-.503.1-.202.05-.378-.025-.529-.076-.151-.679-1.637-.93-2.242-.244-.59-.494-.51-.679-.52-.176-.008-.378-.01-.579-.01-.202 0-.529.076-.806.378-.276.302-1.056 1.033-1.056 2.518 0 1.486 1.082 2.921 1.233 3.123.151.202 2.127 3.249 5.152 4.553.719.311 1.281.497 1.72.636.721.231 1.378.198 1.897.12.58-.087 1.785-.73 2.036-1.436.251-.705.251-1.31.176-1.436-.076-.126-.276-.202-.579-.353z" fill="#FFF"/></svg></a></div>
 </nav>
 
 <!-- â•â•â•â• HERO â•â•â•â• -->
@@ -1294,7 +1310,7 @@
 <div class="dubai-cta">
   <h2 class="dubai-cta-title">Dubai is not a market to watch.<br>It is a market to <em>act on.</em></h2>
   <p class="dubai-cta-sub">The question for every serious investor is no longer whether Dubai belongs in a portfolio. It is how much — and through whom. Aureon Realty exists to answer that question with rigour, experience, and absolute independence.</p>
-  <a href="https://wa.me/971504236298" target="_blank" class="btn-primary">Speak with Gaurav Mehta</a>
+  <a href="https://wa.me/971504236298?text=Hi%20Gaurav%2C%0ALets%20connect%20on%20a%20call.." target="_blank" class="btn-primary">Speak with Gaurav Mehta</a>
 </div>
 
 <div class="gold-divider"><div class="gold-divider-diamond"></div></div>
@@ -1404,8 +1420,10 @@ window.addEventListener("keydown", function(e) {
     document.getElementById("s4-pillars").style.display = "none"; 
     addClass("s4-merge","visible"); 
     startGoldenParticles();
+    var vBg = document.getElementById("vid-bg"); if (vBg) { vBg.currentTime = 0; vBg.play().catch(e=>{}); }
+    var vFg = document.getElementById("vid-fg"); if (vFg) { vFg.currentTime = 0; vFg.play().catch(e=>{}); }
   }, pillarsOut+900);
-  var overlayOut = pillarsOut + 7000;
+  var overlayOut = pillarsOut + 11000;
   setTimeout(function(){ overlay.style.transition = "opacity 1s ease"; overlay.style.opacity = "0"; overlay.style.pointerEvents = "none"; }, overlayOut);
   setTimeout(function(){ overlay.style.display = "none"; }, overlayOut+1100);
 })();
