@@ -894,23 +894,24 @@
     <div class="s4-merge" id="s4-merge" style="width: 100vw; height: 100vh; justify-content: center;">
       <style>
         .vid-container {
-          position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; z-index: 1;
+          position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; z-index: 1; background: var(--charcoal);
         }
-        .vid-bg {
-          position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(40px) brightness(0.5); transform: scale(1.1); pointer-events: none;
+        .vid-desktop, .vid-mobile {
+          position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; opacity: 1;
         }
-        .vid-fg {
-          position: relative; z-index: 2; width: 100%; height: 100%; object-fit: contain; pointer-events: none;
+        .vid-mobile {
+          display: none;
         }
         @media (max-width: 768px) {
-          .vid-bg { display: none; }
-          .vid-fg { object-fit: cover; }
+          .vid-desktop { display: none; }
+          .vid-mobile { display: block; opacity: 1; }
         }
       </style>
       <div class="vid-container">
-        <!-- Placeholder for your vertical video (e.g. 9:16) -->
-        <video id="vid-bg" class="vid-bg" src="animation.mp4" loop muted playsinline disablePictureInPicture></video>
-        <video id="vid-fg" class="vid-fg" src="animation.mp4" loop muted playsinline disablePictureInPicture></video>
+        <!-- Landscape video for laptops/desktop (16:9) -->
+        <video id="vid-desktop" class="vid-desktop" src="animation_desktop.mp4" loop muted playsinline disablePictureInPicture></video>
+        <!-- Vertical video for mobile (9:16) -->
+        <video id="vid-mobile" class="vid-mobile" src="animation_mobile.mp4" loop muted playsinline disablePictureInPicture></video>
       </div>
       <div class="s4-text-reveal" style="opacity: 0; position: absolute; bottom: 60px; z-index: 10;">
         <div class="s4-tagline">Where Wealth Meets Wisdom</div>
@@ -1420,8 +1421,8 @@ window.addEventListener("keydown", function(e) {
     document.getElementById("s4-pillars").style.display = "none"; 
     addClass("s4-merge","visible"); 
     startGoldenParticles();
-    var vBg = document.getElementById("vid-bg"); if (vBg) { vBg.currentTime = 0; vBg.play().catch(e=>{}); }
-    var vFg = document.getElementById("vid-fg"); if (vFg) { vFg.currentTime = 0; vFg.play().catch(e=>{}); }
+    var vDesktop = document.getElementById("vid-desktop"); if (vDesktop) { vDesktop.currentTime = 0; vDesktop.play().catch(e=>{}); }
+    var vMobile = document.getElementById("vid-mobile"); if (vMobile) { vMobile.currentTime = 0; vMobile.play().catch(e=>{}); }
   }, pillarsOut+900);
   var overlayOut = pillarsOut + 11000;
   setTimeout(function(){ overlay.style.transition = "opacity 1s ease"; overlay.style.opacity = "0"; overlay.style.pointerEvents = "none"; }, overlayOut);
